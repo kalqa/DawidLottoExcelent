@@ -1,18 +1,31 @@
 package pl.lotto.numberreceiver;
 
-import java.util.List;
-import pl.lotto.drawdategenerator.DrawDateGeneratorFacade;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import pl.lotto.numberreceiver.dto.NumberReceiverResultDto;
 
+import static pl.lotto.numberreceiver.NumberReceiverMessageProvider.CORRECT_INPUT_NUMBERS_MESSAGE;
+import static pl.lotto.numberreceiver.NumberReceiverMessageProvider.INCORRECT_INPUT_NUMBERS_MESSAGE;
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class NumberReceiverFacade {
 
-    DrawDateGeneratorFacade drawDateGeneratorFacade;
+    NumbersValidator validator;
 
-    NumberReceiverFacade(DrawDateGeneratorFacade drawDateGeneratorFacade) {
-        this.drawDateGeneratorFacade = drawDateGeneratorFacade;
+    public NumberReceiverResultDto inputNumbers(String numbersFromUser) {
+        if (!validator.areCorrectNumbers(numbersFromUser)) {
+            return new NumberReceiverResultDto(INCORRECT_INPUT_NUMBERS_MESSAGE);
+        }
+        Ticket ticket = new Ticket(numbersFromUser);
+
+        return new NumberReceiverResultDto(CORRECT_INPUT_NUMBERS_MESSAGE);
     }
 
-    public NumberReceiverResultDto inputNumbers(List<Integer> numbersFromUser) {
-        return new NumberReceiverResultDto("all went good");
+    public String getPlayerNumber(String token) {
+//        Ticket ticket = ticketRepository.findTicketByToken(token);
+//        return ticket.getNumbers();
+
+        return "1,2,3,4,5,6";
     }
 }
