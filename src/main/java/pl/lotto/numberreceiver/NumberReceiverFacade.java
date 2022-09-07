@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import pl.lotto.numberreceiver.dto.NumberReceiverResultDto;
 
+import java.util.List;
+
 import static pl.lotto.numberreceiver.NumberReceiverMessageProvider.CORRECT_INPUT_NUMBERS_MESSAGE;
 import static pl.lotto.numberreceiver.NumberReceiverMessageProvider.INCORRECT_INPUT_NUMBERS_MESSAGE;
 
@@ -13,7 +15,7 @@ public class NumberReceiverFacade {
 
     NumbersValidator validator;
 
-    public NumberReceiverResultDto inputNumbers(String numbersFromUser) {
+    public NumberReceiverResultDto inputNumbers(List<Integer> numbersFromUser) {
         if (!validator.areCorrectNumbers(numbersFromUser)) {
             return new NumberReceiverResultDto(INCORRECT_INPUT_NUMBERS_MESSAGE);
         }
@@ -22,10 +24,10 @@ public class NumberReceiverFacade {
         return new NumberReceiverResultDto(CORRECT_INPUT_NUMBERS_MESSAGE);
     }
 
-    public String getPlayerNumber(String token) {
+    public List<Integer> getPlayerNumber(String token) {
 //        Ticket ticket = ticketRepository.findTicketByToken(token);
 //        return ticket.getNumbers();
 
-        return "1,2,3,4,5,6";
+        return List.of(1,2,3,4,5,6);
     }
 }

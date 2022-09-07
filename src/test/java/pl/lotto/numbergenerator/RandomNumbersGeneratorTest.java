@@ -2,7 +2,7 @@ package pl.lotto.numbergenerator;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,7 +16,7 @@ class RandomNumbersGeneratorTest {
         int numberPool = 6;
 
         // when
-        Set<Integer> generatedNumbers = generatorFacade.getGeneratedNumbers();
+        List<Integer> generatedNumbers = generatorFacade.getGeneratedNumbers();
 
         // then
         assertEquals(generatedNumbers.size(), numberPool);
@@ -28,7 +28,7 @@ class RandomNumbersGeneratorTest {
         LottoNumberGeneratorFacade generatorFacade = new LottoNumberGeneratorFacade();
 
         // when
-        Set<Integer> generatedNumbers = generatorFacade.getGeneratedNumbers();
+        List<Integer> generatedNumbers = generatorFacade.getGeneratedNumbers();
 
         // then
         for (Integer number : generatedNumbers) {

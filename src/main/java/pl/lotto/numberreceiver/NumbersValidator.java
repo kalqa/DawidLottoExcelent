@@ -1,17 +1,16 @@
 package pl.lotto.numberreceiver;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 class NumbersValidator {
-    NumbersTypeChanger typeChanger;
 
-    NumbersValidator(NumbersTypeChanger typeChanger) {
-        this.typeChanger = typeChanger;
-    }
 
-    boolean areCorrectNumbers(String userNumbers) {
+
+    boolean areCorrectNumbers(List<Integer> userNumbers) {
         try {
-            Set<Integer> numbers = typeChanger.changeStringToSet(userNumbers);
+            Set<Integer> numbers = new HashSet<>(userNumbers);
 
             if (numbers.size() != 6) {
                 return false;
@@ -25,7 +24,6 @@ class NumbersValidator {
         } catch (NumberFormatException e) {
             return false;
         }
-
 
         return true;
     }

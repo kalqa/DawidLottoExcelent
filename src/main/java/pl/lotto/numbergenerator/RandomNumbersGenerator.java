@@ -1,8 +1,7 @@
 package pl.lotto.numbergenerator;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class RandomNumbersGenerator {
 
@@ -12,12 +11,12 @@ class RandomNumbersGenerator {
         this.random = random;
     }
 
-    Set<Integer> generateRandomNumbers(int howManyNumbers, int minNumber, int maxNumber) {
+    List<Integer> generateRandomNumbers(int howManyNumbers, int minNumber, int maxNumber) {
         Set<Integer> generatedNumbers = new HashSet<>();
 
         while (generatedNumbers.size() < howManyNumbers) {
             generatedNumbers.add(random.nextInt(maxNumber - minNumber + 1) + minNumber);
         }
-        return generatedNumbers;
+        return new ArrayList<>(generatedNumbers);
     }
 }

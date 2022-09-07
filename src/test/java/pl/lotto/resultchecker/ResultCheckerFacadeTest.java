@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import pl.lotto.numbergenerator.LottoNumberGeneratorFacade;
 import pl.lotto.numberreceiver.NumberReceiverFacade;
 
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,10 +23,10 @@ class ResultCheckerFacadeTest {
     @ParameterizedTest
     @MethodSource("numbersProvider")
     void should_pass_when_resultChecker_return_correct_value(int expectedResult,
-                                                             String playerGivenNumbers,
-                                                             Set<Integer> randomNumbers) {
+                                                             List<Integer> playerGivenNumbers,
+                                                             List<Integer> randomNumbers) {
         // given
-        mockNumbers(playerGivenNumbers, randomNumbers);
+        mockUserInputAndWinNumbers(playerGivenNumbers, randomNumbers);
         ResultCheckerFacade checkerFacade =
                 new ResultCheckerFacade(mockReceiverFacade, mockGeneratorFacade);
 
@@ -39,25 +39,25 @@ class ResultCheckerFacadeTest {
 
     private static Stream<Arguments> numbersProvider() {
         final Arguments arg1 = Arguments.of(6,
-                "1, 2, 3, 4, 5, 6",
-                Set.of(1, 2, 3, 4, 5, 6));
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(1, 2, 3, 4, 5, 6));
 
         final Arguments arg2 = Arguments.of(4,
-                "1, 2, 3, 4, 5, 6",
-                Set.of(6, 9, 5, 2, 11, 1));
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(6, 9, 5, 2, 11, 1));
 
         final Arguments arg3 = Arguments.of(0,
-                "1, 2, 3, 4, 5, 6",
-                Set.of(7, 8, 9, 10, 11, 12));
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(7, 8, 9, 10, 11, 12));
 
         final Arguments arg4 = Arguments.of(1,
-                "1, 2, 3, 4, 5, 6",
-                Set.of(6, 8, 9, 10, 11, 12));
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(6, 8, 9, 10, 11, 12));
 
         return Stream.of(arg1, arg2, arg3, arg4);
     }
 
-    private void mockNumbers(String userNumbers, Set<Integer> generatedNumbers) {
+    private void mockUserInputAndWinNumbers(List<Integer> userNumbers, List<Integer> generatedNumbers) {
         when(mockReceiverFacade.getPlayerNumber("token")).thenReturn(userNumbers);
         when(mockGeneratorFacade.getGeneratedNumbers()).thenReturn(generatedNumbers);
     }

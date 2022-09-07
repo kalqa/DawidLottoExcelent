@@ -1,13 +1,11 @@
 package pl.lotto.resultchecker;
 
 
-import java.util.Set;
+import java.util.List;
 
 class ResultChecker {
 
-    int howManyNumbersPlayerHit(String numbersFromPlayer, Set<Integer> generatedNumbers) {
-        NumbersTypeChanger changer = new NumbersTypeChanger();
-        Set<Integer> playerNumbers = changer.changeStringToSet(numbersFromPlayer);
+    int howManyNumbersPlayerHit(List<Integer> playerNumbers, List<Integer> generatedNumbers) {
 
         int result = 0;
         for (Integer number : playerNumbers) {
