@@ -12,7 +12,7 @@ public class ResultCheckerFacade {
         this.numberGeneratorFacade = numberGeneratorFacade;
     }
 
-    public int checkResult(String token) {
+    public long checkResult(String token) {
         ResultChecker resultChecker = new ResultChecker();
         return resultChecker.howManyNumbersPlayerHit(
                 numberReceiverFacade.getPlayerNumber(token),

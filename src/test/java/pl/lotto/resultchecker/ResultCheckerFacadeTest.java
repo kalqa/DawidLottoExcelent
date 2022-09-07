@@ -22,7 +22,7 @@ class ResultCheckerFacadeTest {
 
     @ParameterizedTest
     @MethodSource("numbersProvider")
-    void should_pass_when_resultChecker_return_correct_value(int expectedResult,
+    void should_pass_when_resultChecker_return_correct_value(long expectedResult,
                                                              List<Integer> playerGivenNumbers,
                                                              List<Integer> randomNumbers) {
         // given
@@ -31,7 +31,7 @@ class ResultCheckerFacadeTest {
                 new ResultCheckerFacade(mockReceiverFacade, mockGeneratorFacade);
 
         // when
-        int result = checkerFacade.checkResult("token");
+        long result = checkerFacade.checkResult("token");
 
         // then
         assertEquals(expectedResult, result);

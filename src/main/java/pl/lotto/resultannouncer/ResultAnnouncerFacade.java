@@ -10,7 +10,7 @@ public class ResultAnnouncerFacade {
     }
 
     public String getPlayerResult(String token) {
-        int result = resultCheckerFacade.checkResult(token);
+        long result = resultCheckerFacade.checkResult(token);
         String message = "Player with token: " + token + " hit " + result + " numbers";
 
         return message;
