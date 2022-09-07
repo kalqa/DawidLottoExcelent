@@ -7,7 +7,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class RandomNumbersGeneratorTest {
+class RandomLottoNumbersGeneratorTest {
 
     @Test
     void should_return_true_when_numberGenerator_generated_expected_poolNumbers() {
@@ -19,7 +19,7 @@ class RandomNumbersGeneratorTest {
         List<Integer> generatedNumbers = generatorFacade.getGeneratedNumbers();
 
         // then
-        assertEquals(generatedNumbers.size(), numberPool);
+        assertEquals(numberPool, generatedNumbers.size());
     }
 
     @Test

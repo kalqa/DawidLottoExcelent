@@ -5,6 +5,6 @@ import java.time.LocalDateTime;
 class DrawDataGenerator {
 
     LocalDateTime generateNextDrawDate() {
-        return LocalDateTime.now().plusDays(7);
+        return LocalDateTime.of(2022,9,10,18,0);
     }
 }

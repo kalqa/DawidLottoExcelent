@@ -26,6 +26,7 @@ class ResultCheckerFacadeTest {
                                                              List<Integer> playerGivenNumbers,
                                                              List<Integer> randomNumbers) {
         // given
+        ResultRepository resultRepository = new ResultRepositoryTestImpl();
         mockUserInputAndWinNumbers(playerGivenNumbers, randomNumbers);
         ResultCheckerFacade checkerFacade =
                 new ResultCheckerFacade(mockReceiverFacade, mockGeneratorFacade);
