@@ -32,6 +32,8 @@ public class NumberReceiverFacade {
         Ticket ticket = ticketRepository.findTicketByToken(token);
         return ticket.getNumbers();
 
-//        return List.of(1,2,3,4,5,6);
+    }
+    public Ticket getTicket(String token){
+        return ticketRepository.findTicketByToken(token);
     }
 }

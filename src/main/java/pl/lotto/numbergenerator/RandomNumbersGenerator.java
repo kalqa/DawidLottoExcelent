@@ -1,6 +1,7 @@
 package pl.lotto.numbergenerator;
 
 import java.security.SecureRandom;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -8,23 +9,24 @@ import java.util.Set;
 
 class RandomNumbersGenerator {
 
-    private final SecureRandom random;
+    private final SecureRandom random = new SecureRandom();
+    WinningNumbersRepository repository;
 
-    RandomNumbersGenerator(SecureRandom random) {
-        this.random = random;
+    public RandomNumbersGenerator(WinningNumbersRepository repository) {
+        this.repository = repository;
     }
 
-    List<Integer> generateRandomNumbers(int howManyNumbers, int minNumber, int maxNumber) {
+    void generateRandomNumbers() {
         Set<Integer> generatedNumbers = new HashSet<>();
 
-        while (generatedNumbers.size() < howManyNumbers) {
-            generatedNumbers.add(random.nextInt(maxNumber - minNumber + 1) + minNumber);
+        while (generatedNumbers.size() < LottoNumberGeneratorConfiguration.NUMBER_POOL) {
+            generatedNumbers.add(random.nextInt(LottoNumberGeneratorConfiguration.UPPER_RANGE -
+                                                            LottoNumberGeneratorConfiguration.LOWER_RANGE + 1) +
+                                                LottoNumberGeneratorConfiguration.LOWER_RANGE);
         }
-
-//        Set<Integer> generatedNumbers = random.ints(howManyNumbers,minNumber,maxNumber)
-//                .boxed()
-//                .collect(toSet());
-
-        return new ArrayList<>(generatedNumbers);
+        List<Integer> sixGeneratedNumbers = new ArrayList<>(generatedNumbers);
+        WinningNumbers winningNumbers = new WinningNumbers(sixGeneratedNumbers, LocalDateTime.now());
+        repository.save(winningNumbers);
     }
+
 }

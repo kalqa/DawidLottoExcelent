@@ -2,6 +2,7 @@ package pl.lotto.resultchecker;
 
 import pl.lotto.numbergenerator.LottoNumberGeneratorFacade;
 import pl.lotto.numberreceiver.NumberReceiverFacade;
+import pl.lotto.numberreceiver.Ticket;
 
 public class ResultCheckerFacade {
     NumberReceiverFacade numberReceiverFacade;
@@ -12,10 +13,13 @@ public class ResultCheckerFacade {
         this.numberGeneratorFacade = numberGeneratorFacade;
     }
 
-    public long checkResult(String token) {
-        ResultChecker resultChecker = new ResultChecker();
-        return resultChecker.howManyNumbersPlayerHit(
-                numberReceiverFacade.getPlayerNumber(token),
-                numberGeneratorFacade.getGeneratedNumbers());
+    TwoListComparer listComparer = new TwoListComparer();
+
+    public int checkResult(String token){
+        Ticket ticket = numberReceiverFacade.getTicket(token);
+        return listComparer.howManyNumbersPlayerHit(
+                ticket.getNumbers(),
+                numberGeneratorFacade.getGeneratedNumbers(ticket.getDrawDate()));
     }
+
 }

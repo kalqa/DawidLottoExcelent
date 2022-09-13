@@ -6,6 +6,5 @@ import java.util.UUID;
 public record NumberReceiverResultDto(
         String resultMessage,
         LocalDateTime drawDate
-//     ,UUID lotteryId
 ) {
 }

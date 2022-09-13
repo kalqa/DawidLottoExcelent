@@ -1,6 +1,7 @@
 package pl.lotto.numberreceiver;
 
 import org.junit.jupiter.api.Test;
+import pl.lotto.drawdategenerator.DrawDataGeneratorFacade;
 import pl.lotto.numberreceiver.dto.NumberReceiverResultDto;
 
 import java.time.LocalDateTime;
@@ -13,11 +14,12 @@ class NumberReceiverFacadeTest {
     @Test
     public void should_return_correct_message_when_validation_passed_with_six_numbers() {
         // given
+        DrawDataGeneratorFacade dataGeneratorFacade = new DrawDataGeneratorFacade();
         TicketRepository ticketRepositoryTestImpl = new TicketRepositoryTestImpl();
         NumberReceiverFacade numberReceiverFacade =
                 new NumberReceiverConfiguration().createModuleForTests(ticketRepositoryTestImpl);
         List<Integer> numbersFromUser = List.of(1, 23, 3, 4, 58, 6);
-        LocalDateTime expectedDate = LocalDateTime.of(2022,9,10,18,0);
+        LocalDateTime expectedDate = dataGeneratorFacade.getNextDrawDate();
 
         // when
         NumberReceiverResultDto result = numberReceiverFacade.inputNumbers(numbersFromUser);

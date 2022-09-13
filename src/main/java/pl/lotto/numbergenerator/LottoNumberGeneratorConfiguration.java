@@ -9,4 +9,9 @@ public class LottoNumberGeneratorConfiguration {
      * because we need unique numbers and they cannot be duplicate
      */
     static final int NUMBER_POOL = 6;
+
+    LottoNumberGeneratorFacade createModuleForTests(WinningNumbersRepository winningNumbersRepository) {
+        return new LottoNumberGeneratorFacade(winningNumbersRepository);
+    }
+
 }

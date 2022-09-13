@@ -15,7 +15,7 @@ class ResultAnnouncerFacadeTest {
     @Test
     void should_pass_when_getPlayerResult_return_expected_message() {
         // given
-        long hitsNumbers = 0;
+        int hitsNumbers = 0;
         mockNumbers(hitsNumbers);
         ResultAnnouncerFacade announcerFacade = new ResultAnnouncerFacade(mockCheckerFacade);
 
@@ -26,7 +26,7 @@ class ResultAnnouncerFacadeTest {
         assertEquals("Player with token: 1234 hit 0 numbers", message);
     }
 
-    private void mockNumbers(long hitsNumber) {
+    private void mockNumbers(int hitsNumber) {
         when(mockCheckerFacade.checkResult("token")).thenReturn(hitsNumber);
     }
 

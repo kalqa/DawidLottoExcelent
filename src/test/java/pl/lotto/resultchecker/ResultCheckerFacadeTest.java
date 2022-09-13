@@ -5,7 +5,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import pl.lotto.numbergenerator.LottoNumberGeneratorFacade;
 import pl.lotto.numberreceiver.NumberReceiverFacade;
+import pl.lotto.numberreceiver.Ticket;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -26,13 +28,12 @@ class ResultCheckerFacadeTest {
                                                              List<Integer> playerGivenNumbers,
                                                              List<Integer> randomNumbers) {
         // given
-        ResultRepository resultRepository = new ResultRepositoryTestImpl();
         mockUserInputAndWinNumbers(playerGivenNumbers, randomNumbers);
         ResultCheckerFacade checkerFacade =
                 new ResultCheckerFacade(mockReceiverFacade, mockGeneratorFacade);
 
         // when
-        long result = checkerFacade.checkResult("token");
+        int result = checkerFacade.checkResult("token");
 
         // then
         assertEquals(expectedResult, result);
@@ -57,9 +58,22 @@ class ResultCheckerFacadeTest {
 
         return Stream.of(arg1, arg2, arg3, arg4);
     }
+    private void mockTicket(Ticket ticket){
+        when(mockReceiverFacade.getTicket("token")).thenReturn(ticket);
+    }
 
     private void mockUserInputAndWinNumbers(List<Integer> userNumbers, List<Integer> generatedNumbers) {
-        when(mockReceiverFacade.getPlayerNumber("token")).thenReturn(userNumbers);
-        when(mockGeneratorFacade.getGeneratedNumbers()).thenReturn(generatedNumbers);
+        Ticket ticket = new Ticket(userNumbers);
+        mockTicket(ticket);
+        when(mockReceiverFacade.getTicket("token").getDrawDate()).thenReturn(LocalDateTime.now());
+        when(mockReceiverFacade.getTicket("token").getNumbers()).thenReturn(userNumbers);
+        when(mockGeneratorFacade.getGeneratedNumbers(mockReceiverFacade.getTicket("token").getDrawDate())).thenReturn(generatedNumbers);
     }
 }
+
+//    Ticket ticket = numberReceiverFacade.getTicket(token);
+//        return listComparer.howManyNumbersPlayerHit(
+//                ticket.getNumbers(),
+//                numberGeneratorFacade.getGeneratedNumbers(ticket.getDrawDate()));
+//                }
+

@@ -5,7 +5,7 @@ import pl.lotto.numberreceiver.NumberReceiverFacade;
 
 public class ResultCheckerConfiguration {
 
-    ResultCheckerFacade createModuleForTest() {
-        return new ResultCheckerFacade(new NumberReceiverFacade(), new LottoNumberGeneratorFacade());
-    }
+//    ResultCheckerFacade createModuleForTest() {
+//        return new ResultCheckerFacade(new NumberReceiverFacade(), new LottoNumberGeneratorFacade());
+//    }
 }
