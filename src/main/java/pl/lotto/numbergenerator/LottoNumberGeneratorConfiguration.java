@@ -10,8 +10,9 @@ public class LottoNumberGeneratorConfiguration {
      */
     static final int NUMBER_POOL = 6;
 
-    LottoNumberGeneratorFacade createModuleForTests(WinningNumbersRepository winningNumbersRepository) {
-        return new LottoNumberGeneratorFacade(winningNumbersRepository);
+    void generateNumbersForTest(WinningNumbersRepository repository){
+        RandomNumbersGenerator generator = new RandomNumbersGenerator(repository);
+        generator.generateRandomNumbers();
     }
 
 }

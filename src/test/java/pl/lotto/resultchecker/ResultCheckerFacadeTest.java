@@ -7,7 +7,6 @@ import pl.lotto.numbergenerator.LottoNumberGeneratorFacade;
 import pl.lotto.numberreceiver.NumberReceiverFacade;
 import pl.lotto.numberreceiver.Ticket;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -65,15 +64,12 @@ class ResultCheckerFacadeTest {
     private void mockUserInputAndWinNumbers(List<Integer> userNumbers, List<Integer> generatedNumbers) {
         Ticket ticket = new Ticket(userNumbers);
         mockTicket(ticket);
-        when(mockReceiverFacade.getTicket("token").getDrawDate()).thenReturn(LocalDateTime.now());
         when(mockReceiverFacade.getTicket("token").getNumbers()).thenReturn(userNumbers);
-        when(mockGeneratorFacade.getGeneratedNumbers(mockReceiverFacade.getTicket("token").getDrawDate())).thenReturn(generatedNumbers);
+        when(mockGeneratorFacade.getGeneratedNumbers(mockReceiverFacade
+                        .getTicket("token")
+                        .getDrawDate())
+                .getWinningNumbers())
+                .thenReturn(generatedNumbers);
     }
 }
-
-//    Ticket ticket = numberReceiverFacade.getTicket(token);
-//        return listComparer.howManyNumbersPlayerHit(
-//                ticket.getNumbers(),
-//                numberGeneratorFacade.getGeneratedNumbers(ticket.getDrawDate()));
-//                }
 

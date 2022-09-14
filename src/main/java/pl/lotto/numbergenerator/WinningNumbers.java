@@ -17,5 +17,7 @@ public class WinningNumbers {
     private List<Integer> winningNumbers;
     private LocalDateTime drawTime;
 
-
+    public WinningNumbers(List<Integer> winningNumbers) {
+        this.winningNumbers = winningNumbers;
+    }
 }

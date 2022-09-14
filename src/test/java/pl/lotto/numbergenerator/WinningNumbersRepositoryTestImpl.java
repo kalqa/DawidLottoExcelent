@@ -2,7 +2,6 @@ package pl.lotto.numbergenerator;
 
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,8 +14,8 @@ public class WinningNumbersRepositoryTestImpl implements WinningNumbersRepositor
     }
 
     @Override
-    public List<Integer> findWinningNumbersByDrawDate(LocalDateTime drawDate) {
-        return database.get(drawDate).getWinningNumbers();
+    public WinningNumbers findWinningNumbersByDrawDate(LocalDateTime drawDate) {
+        return database.get(drawDate);
     }
 
 }

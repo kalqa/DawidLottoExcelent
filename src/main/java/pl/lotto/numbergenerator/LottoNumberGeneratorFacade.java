@@ -1,18 +1,16 @@
 package pl.lotto.numbergenerator;
 
 
-import java.time.LocalDateTime;
-import java.util.List;
+import lombok.AllArgsConstructor;
 
+import java.time.LocalDateTime;
+
+@AllArgsConstructor
 public class LottoNumberGeneratorFacade {
 
     WinningNumbersRepository repository;
 
-    public LottoNumberGeneratorFacade(WinningNumbersRepository repository) {
-        this.repository = repository;
-    }
-
-    public List<Integer> getGeneratedNumbers(LocalDateTime drawDate) {
+    public WinningNumbers getGeneratedNumbers(LocalDateTime drawDate) {
         return repository.findWinningNumbersByDrawDate(drawDate);
     }
 }
